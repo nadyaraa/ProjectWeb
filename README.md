@@ -1,59 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# KosKu : Platform Pencarian & Pengelolaan Kos Banjarmasin
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web untuk memudahkan mahasiswa dan masyarakat dalam menemukan serta mengelola hunian kos secara digital di wilayah Banjarmasin dan sekitarnya. 
+Dibangun sebagai Proyek Akhir mata kuliah Pemrograman Web II, Fakultas Teknik, Program Studi Teknologi Informasi, Universitas Lambung Mangkurat.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tim Pengembang
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Nama                | NIM           | Peran (Role)               | GitHub               |
+| ------------------- | ------------- | -------------------------- |----------------------|
+| M. Anshary          | 2410817310008 | Frontend & UI Designer     | @Aan97yxh            |
+| Nadya Ramadhani     | 2410817120019 | Database Engineer          | @nadyaraa            |
+| Rachel Wina Yuda    | 2410817220030 | Backend Developer          | @raequellee          |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+| Komponen          | Teknologi                      |
+| ----------------- | ------------------------------ |
+| Bahasa            | PHP, JavaScript                |
+| Backend Framework | Laravel (v11.x)                |
+| Frontend Engine   | Blade Templates & Tailwind CSS |
+| Database          | SQLite                         |
+| Starter Kit Auth  | Laravel Breeze (Blade)         |
+| Version Control   | GitHub                         |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Fitur Utama
+- **Sistem Otentikasi Multi-Role:** Registrasi dan login terpisah untuk Admin, Pemilik Kos, dan Pencari Kos.
+- **Manajemen Data Kos (CRUD):** Pemilik kos dapat menambah, melihat, mengubah, dan menghapus data properti kos mereka.
+- **Pencarian Hunian Efisien:** Pencari kos dapat menjelajahi daftar kos di Banjarmasin lengkap dengan detail fasilitas dan integrasi tombol hubungi pemilik via WhatsApp.
+- **Panel Kendali Admin:** Manajemen penuh terhadap data seluruh pengguna dan properti kos yang terdaftar dalam sistem.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Cara Instalasi
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prasyarat
 
-## Contributing
+Pastikan perangkat Anda sudah terinstall komponen berikut:
+- PHP (Minimal v8.2)
+- Composer
+- Node.js & NPM (Untuk kompilasi Tailwind CSS)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Langkah Instalasi
 
-## Code of Conduct
+1. Clone repository kelompok ke direktori lokal Anda:
+    ```bash
+    git clone https://github.com/nadyaraa/Web-Project.git
+    cd Web-Project
+    ```
+    *(Catatan: Sesuaikan URL di atas dengan tautan resmi repositori organisasi/kelompok kalian jika berbeda)*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Install seluruh dependensi backend (PHP):
+    ```bash
+    composer install
+    ```
 
-## Security Vulnerabilities
+3. Salin file konfigurasi environment:
+    ```bash
+    cp .env.example .env
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Buat kunci enkripsi aplikasi baru:
+    ```bash
+    php artisan key:generate
+    ```
 
-## License
+5. Konfigurasi basis data SQLite lokal:
+    - Di Windows (Command Prompt), buat file database kosong:
+    ```bash
+    type nul > database/database.sqlite
+    ```
+    - Buka file `.env` Anda, lalu sesuaikan bagian database menjadi seperti ini:
+    ```env
+    DB_CONNECTION=sqlite
+    # Hapus baris DB_HOST, DB_PORT, DB_DATABASE lama, cukup sisakan DB_CONNECTION
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. Jalankan migrasi database untuk membentuk struktur tabel:
+    ```bash
+    php artisan migrate
+    ```
+
+7. Install dependensi frontend dan lakukan kompilasi aset Tailwind CSS:
+    ```bash
+    npm install
+    npm run build
+    ```
+
+8. Jalankan server lokal Laravel:
+    ```bash
+    php artisan serve
+    ```
+    Aplikasi dapat diakses melalui browser di alamat: **http://127.0.0.1:8000**
+
+---
+
+## Akun Default & Hak Akses
+
+| Role     | Cara Pendaftaran / Hak Akses                                                              |
+| -------- | ----------------------------------------------------------------------------------------- |
+| Admin    | Daftarkan akun baru, lalu ubah kolom `role` menjadi `admin` secara manual lewat database. |
+| Pencari  | Daftar langsung pada form halaman Register dengan memilih peran **Pencari Kos**.          |
+| Pemilik  | Daftar langsung pada form halaman Register dengan memilih peran **Pemilik Kos**.          |
+
+---
+
+## Struktur Database (Migration Utama)
+
+Proyek ini menggunakan beberapa file migrasi khusus di luar bawaan framework untuk mendukung fungsionalitas sistem:
+- `xxxx_create_kos_table.php` : Menyimpan data detail kos (nama, harga, fasilitas, alamat, gambar, dan relasi `user_id`).
+- `xxxx_add_role_to_users_table.php` : Menambahkan kolom hak akses tipe pengguna (`admin`, `pemilik`, `pencari`).
+- `xxxx_add_no_wa_to_users_table.php` : Menambahkan kolom nomor telepon WhatsApp aktif untuk keperluan komunikasi langsung.
+
+---
+
+## Hak Akses Pengguna
+
+### 👨‍💼 Admin
+- Memantau ringkasan statistik total data pada halaman utama Dashboard Admin.
+- Melihat, melacak, dan mengelola seluruh data pengguna sistem (Melihat daftar pengguna aktif).
+- Memantau dan mengelola seluruh properti kos yang dipublikasikan di platform.
+
+### 🏠 Pemilik Kos
+- Mengakses panel Dashboard khusus Pemilik Kos.
+- Melakukan manajemen penuh (Create, Read, Update, Delete) pada properti kos pribadi miliknya.
+- Menyantumkan nomor WhatsApp untuk memudahkan komunikasi dengan calon penyewa.
+
+### 🎓 Pencari Kos (Mahasiswa / Umum)
+- Menjelajahi beranda utama platform yang menampilkan seluruh daftar kos di Banjarmasin secara real-time.
+- Mengakses halaman detail kos untuk melihat informasi harga, fasilitas, lokasi, serta foto bangunan.
+- Menghubungi pemilik kos secara langsung melalui tautan tombol integrasi API WhatsApp.
+
+---
+
+## Lisensi
+
+Proyek aplikasi web ini dikembangkan murni untuk keperluan akademik tugas Proyek Akhir mata kuliah Pemrograman Web II, Program Studi Teknologi Informasi, Universitas Lambung Mangkurat, tahun 2026.
