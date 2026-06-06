@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Kos; // Pastikan nama model Kos Anda sudah benar (Kos atau Kost)
+use App\Models\Kos; 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
