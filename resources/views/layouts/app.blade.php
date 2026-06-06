@@ -7,28 +7,33 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-50 relative"> 
+
+            @if (session('success'))
+                <div id="flash-success" data-message="{{ session('success') }}" class="hidden"></div>
+            @endif
             @include('layouts.navigation')
 
             <div class="absolute top-0 left-0 right-0 h-[340px] z-0 bg-cover bg-center" 
                  style="background-image: url('{{ asset('images/headerbgdashboard.jpg') }}'); background-size: cover; background-position: center;">
             </div>
+            
             @isset($header)
-                <header class="bg-white shadow relative z-10"> <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="bg-white shadow relative z-10"> 
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
             @endisset
 
-            <main class="relative z-10"> {{ $slot }}
+            <main class="relative z-10"> 
+                {{ $slot }}
             </main>
         </div>
     </body>

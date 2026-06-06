@@ -1,7 +1,16 @@
-import './bootstrap';
+import Swal from 'sweetalert2';
+window.Swal = Swal;
 
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
+document.addEventListener('DOMContentLoaded', () => {
+    const flashSuccess = document.getElementById('flash-success');
+    if (flashSuccess) {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: flashSuccess.dataset.message,
+            icon: 'success',
+            confirmButtonColor: '#005EAD', 
+            timer: 3000,
+            timerProgressBar: true
+        });
+    }
+});
