@@ -80,18 +80,23 @@ Pastikan perangkat Anda sudah terinstall komponen berikut:
     # Hapus baris DB_HOST, DB_PORT, DB_DATABASE lama, cukup sisakan DB_CONNECTION
     ```
 
-6. Jalankan migrasi database untuk membentuk struktur tabel:
+6. Jalankan migrasi database sekaligus tanam data tiruan (dummy data) awal:
     ```bash
-    php artisan migrate
+    php artisan migrate --seed
     ```
 
-7. Install dependensi frontend dan lakukan kompilasi aset Tailwind CSS:
+7. Buat tautan simbolis (symbolic link) agar aset gambar kos hasil seeder dapat diakses oleh browser:
+    ```bash
+    php artisan storage:link
+    ```
+
+8. Install dependensi frontend dan lakukan kompilasi aset Tailwind CSS:
     ```bash
     npm install
     npm run build
     ```
 
-8. Jalankan server lokal Laravel:
+9. Jalankan server lokal Laravel:
     ```bash
     php artisan serve
     ```
@@ -99,13 +104,17 @@ Pastikan perangkat Anda sudah terinstall komponen berikut:
 
 ---
 
-## Akun Default & Hak Akses
+## Akun Default & Hak Akses (Testing Ready)
 
-| Role     | Cara Pendaftaran / Hak Akses                                                              |
-| -------- | ----------------------------------------------------------------------------------------- |
-| Admin    | Daftarkan akun baru, lalu ubah kolom `role` menjadi `admin` secara manual lewat database. |
-| Pencari  | Daftar langsung pada form halaman Register dengan memilih peran **Pencari Kos**.          |
-| Pemilik  | Daftar langsung pada form halaman Register dengan memilih peran **Pemilik Kos**.          |
+Untuk mempermudah proses pengujian dan demo aplikasi, sistem telah menyediakan 3 akun default dengan role yang berbeda melalui mekanisme database seeder. Semua akun menggunakan password seragam: **`password`**.
+
+| Role Pengguna | Email Login | Password | Hak Akses Utama |
+| :--- | :--- | :--- | :--- |
+| **👨‍💼 Admin** | `admin@kosku.com` | `password` | Manajemen penuh seluruh data pengguna dan properti kos di platform. |
+| **🏠 Pemilik Kos** | `pemilik@kosku.com` | `password` | Manajemen (CRUD) properti kos pribadi dan integrasi WhatsApp. |
+| **🎓 Pencari Kos** | `pencari@kosku.com` | `password` | Menjelajahi katalog kos dan mengakses fitur hubungi pemilik. |
+
+*(Catatan: Anda tetap dapat mendaftarkan akun baru secara organik melalui form halaman Register bawaan aplikasi)*
 
 ---
 
