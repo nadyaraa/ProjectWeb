@@ -48,5 +48,5 @@ RUN touch database/database.sqlite \
 
 EXPOSE 80
 
-# 8. Otomatisasi Runtime (Migrasi Struktur Tabel & Pembuatan Symlink Gambar sekaligus)
-CMD php artisan migrate --force && php artisan storage:link --force && apache2-foreground
+# 8. Otomatisasi Runtime (Eksekusi otomatis setiap kali kontainer dinyalakan/terbangun)
+CMD php artisan migrate --force && php artisan db:seed --force && php artisan storage:link --force && apache2-foreground
