@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@kosku.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
-            'no_wa' => '081234567890',
+            'no_wa' => '085124209070',
         ]);
 
         $pemilik = User::create([
@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'pemilik@kosku.com',
             'password' => Hash::make('password'),
             'role' => 'pemilik',
-            'no_wa' => '082198765432',
+            'no_wa' => '085124209070',
         ]);
 
         User::create([
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'pencari@kosku.com',
             'password' => Hash::make('password'),
             'role' => 'pencari',
-            'no_wa' => '089911223344',
+            'no_wa' => '085124209070',
         ]);
 
         // ============================================================
