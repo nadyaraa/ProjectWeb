@@ -118,12 +118,35 @@ Untuk mempermudah proses pengujian dan demo aplikasi, sistem telah menyediakan 3
 
 ---
 
-## Struktur Database (Migration Utama)
+## Struktur Database
 
-Proyek ini menggunakan beberapa file migrasi khusus di luar bawaan framework untuk mendukung fungsionalitas sistem:
-- `xxxx_create_kos_table.php` : Menyimpan data detail kos (nama, harga, fasilitas, alamat, gambar, dan relasi `user_id`).
-- `xxxx_add_role_to_users_table.php` : Menambahkan kolom hak akses tipe pengguna (`admin`, `pemilik`, `pencari`).
-- `xxxx_add_no_wa_to_users_table.php` : Menambahkan kolom nomor telepon WhatsApp aktif untuk keperluan komunikasi langsung.
+### Tabel `users`
+| Kolom | Tipe | Keterangan |
+| --- | --- | --- |
+| `id` | BIGINT (PK) | Primary key auto-increment |
+| `name` | VARCHAR | Nama lengkap pengguna |
+| `email` | VARCHAR (unique) | Email login |
+| `email_verified_at` | TIMESTAMP | Waktu verifikasi email |
+| `password` | VARCHAR | Password terenkripsi |
+| `role` | VARCHAR | Hak akses: `admin`, `pemilik`, `pencari` (default: `pencari`) |
+| `no_wa` | VARCHAR | Nomor WhatsApp aktif pemilik kos |
+| `remember_token` | VARCHAR | Token sesi "ingat saya" |
+| `created_at` / `updated_at` | TIMESTAMP | Timestamp otomatis Laravel |
+
+### Tabel `kos`
+| Kolom | Tipe | Keterangan |
+| --- | --- | --- |
+| `id` | BIGINT (PK) | Primary key auto-increment |
+| `user_id` | BIGINT (FK) | Relasi ke `users.id` (cascade delete) |
+| `nama` | VARCHAR | Nama properti kos |
+| `tipe` | VARCHAR | Tipe kos (putra, putri, campur, dll.) |
+| `lokasi` | VARCHAR | Alamat / lokasi kos |
+| `harga` | INTEGER | Harga sewa per bulan (Rupiah) |
+| `jumlah_kamar` | INTEGER | Jumlah kamar tersedia |
+| `status` | VARCHAR | Status ketersediaan (default: `tersedia`) |
+| `foto` | VARCHAR | Path file foto kos (nullable) |
+| `deskripsi` | TEXT | Deskripsi detail kos (nullable) |
+| `created_at` / `updated_at` | TIMESTAMP | Timestamp otomatis Laravel |
 
 ---
 
