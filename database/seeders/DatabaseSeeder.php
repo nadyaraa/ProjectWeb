@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Kos; 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\File;   
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // ============================================================
+        // OTOMATISASI PENYALINAN FILE FISIK GAMBAR DUMMY
+        // ============================================================
+        
+        Storage::disk('public')->makeDirectory('kos');
+        $sourceFile = public_path('images/dummy-kos.jpg');
+
+        if (File::exists($sourceFile)) {
+            Storage::disk('public')->put('kos/dummy-kos.jpg', File::get($sourceFile));
+        }
+
         // ============================================================
         // SEED DATA USER 
         // ============================================================
@@ -56,7 +69,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 10,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos putra strategis dekat dengan fasilitas umum, lingkungan tenang, dan aman.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -67,7 +80,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 15,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos khusus putri, dekat kampus, sudah termasuk listrik dan Wi-Fi kecepatan tinggi.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -78,7 +91,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 8,
                 'status' => 'penuh',
                 'deskripsi' => 'Fasilitas premium dengan AC, kamar mandi dalam, kasur springbed, dan parkir luas.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -89,7 +102,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 12,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos putra lingkungan islami, bersih, aman dengan pengawasan CCTV 24 jam.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -99,8 +112,8 @@ class DatabaseSeeder extends Seeder
                 'harga' => 650000,
                 'jumlah_kamar' => 20,
                 'status' => 'tersedia',
-                'deskripsi' => 'Lokasi sangat dekat dengan area kuliner dan swalayan, akses jalan mobil lancar.',
-                'foto' => 'dummy-kos.jpg',
+                'deskripsi' => 'Lokasi sangat dekat dengan area kuliner and swalayan, akses jalan mobil lancar.',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -111,7 +124,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 6,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos modern dengan sistem kartu akses, kamar mandi dalam modern, dan fully furnished.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -122,7 +135,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 10,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos murah meriah, kipas angin tersedia, dapur umum bersih, dekat perkantoran.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -133,7 +146,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 8,
                 'status' => 'tersedia',
                 'deskripsi' => 'Lingkungan asri di pinggir sungai miai, suasana tenang sangat cocok untuk belajar.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -144,7 +157,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 14,
                 'status' => 'penuh',
                 'deskripsi' => 'Kamar luas ukuran 4x4 meter, sirkulasi udara sangat bagus, parkiran motor aman berpagar.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
             [
                 'user_id' => $pemilik->id,
@@ -155,7 +168,7 @@ class DatabaseSeeder extends Seeder
                 'jumlah_kamar' => 5,
                 'status' => 'tersedia',
                 'deskripsi' => 'Kos eksekutif dengan fasilitas setara hotel berbintang, water heater, dan keamanan ketat.',
-                'foto' => 'dummy-kos.jpg',
+                'foto' => 'kos/dummy-kos.jpg',
             ],
         ];
 
