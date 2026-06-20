@@ -51,4 +51,4 @@ RUN touch database/database.sqlite \
 EXPOSE 80
 
 # 8. Otomatisasi Runtime (Eksekusi otomatis setiap kali kontainer dinyalakan/terbangun)
-CMD php artisan migrate --force && php artisan db:seed --force && php artisan storage:link --force && apache2-foreground
+CMD php artisan migrate --force && php artisan db:seed --force && php artisan storage:link --force && chown -R www-data:www-data /var/www/html/storage /var/www/html/database && apache2-foreground
