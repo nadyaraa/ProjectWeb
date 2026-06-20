@@ -100,19 +100,18 @@ class KosController extends Controller
             'foto'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // 🌟 BARIS PENYELAMAT: Amankan data gambar lama dari ancaman nilai null
         unset($validated['foto']);
 
         // Ganti foto lama jika ada upload foto baru
         if ($request->hasFile('foto')) {
-            if ($kos->foto) {
+            if ($kos->foto && $kos->foto !== 'kos/dummy-kos.jpg') {
                 Storage::disk('public')->delete($kos->foto);
             }
             $validated['foto'] = $request->file('foto')->store('kos', 'public');
         } 
         // Jika tidak ada foto baru tapi user klik "Hapus Foto"
         elseif ($request->input('hapus_foto') == '1') {
-            if ($kos->foto) {
+            if ($kos->foto && $kos->foto !== 'kos/dummy-kos.jpg') {
                 Storage::disk('public')->delete($kos->foto); 
             }
             $validated['foto'] = null; 
@@ -121,7 +120,7 @@ class KosController extends Controller
         $kos->update($validated);
 
         return redirect()->route('kos.index')
-                         ->with('success', 'Kos berhasil diperbarui!');
+                        ->with('success', 'Kos berhasil diperbarui!');
     }
 
     // DESTROY — Hapus kos dari database
@@ -129,15 +128,14 @@ class KosController extends Controller
     {
         $this->authorizeOwner($kos);
 
-        // Hapus foto dari storage sebelum hapus record
-        if ($kos->foto) {
+        if ($kos->foto && $kos->foto !== 'kos/dummy-kos.jpg') {
             Storage::disk('public')->delete($kos->foto);
         }
 
         $kos->delete();
 
         return redirect()->route('kos.index')
-                         ->with('success', 'Kos berhasil dihapus.');
+                        ->with('success', 'Kos berhasil dihapus.');
     }
 
     // HELPER — Cegah pemilik kos mengakses data milik user lain
