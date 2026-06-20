@@ -1,3 +1,10 @@
+# STAGE 1: Kompilasi Aset Frontend (Vite & Tailwind CSS)
+FROM node:20 AS frontend-builder
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
+
+# STAGE 2: Konfigurasi Server Aplikasi Utama (PHP & Apache)
 FROM php:8.3-apache
 
 # 1. Install dependensi sistem yang dibutuhkan Laravel & SQLite
@@ -28,15 +35,18 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 WORKDIR /var/www/html
 COPY . .
 
+# 🗂️ SALIN ASET VITE YANG SUDAH DIKOMPILASI DARI STAGE 1
+COPY --from=frontend-builder /app/public/build /var/www/html/public/build
+
 # 6. Install Composer & dependensi Laravel
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # 7. Siapkan file database SQLite kosong dan atur hak aksesnya
 RUN touch database/database.sqlite \
-    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache database
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache database public/build
 
 EXPOSE 80
 
-# 8. Otomatisasi Runtime (Menjalankan migrasi struktur tabel saat kontainer dinyalakan)
-CMD php artisan migrate --force && apache2-foreground
+# 8. Otomatisasi Runtime (Migrasi Struktur Tabel & Pembuatan Symlink Gambar sekaligus)
+CMD php artisan migrate --force && php artisan storage:link --force && apache2-foreground
