@@ -100,6 +100,9 @@ class KosController extends Controller
             'foto'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
+        // 🌟 BARIS PENYELAMAT: Amankan data gambar lama dari ancaman nilai null
+        unset($validated['foto']);
+
         // Ganti foto lama jika ada upload foto baru
         if ($request->hasFile('foto')) {
             if ($kos->foto) {
@@ -107,7 +110,7 @@ class KosController extends Controller
             }
             $validated['foto'] = $request->file('foto')->store('kos', 'public');
         } 
-        // jika tidak ada foto baru tapi user klik "Hapus Foto"
+        // Jika tidak ada foto baru tapi user klik "Hapus Foto"
         elseif ($request->input('hapus_foto') == '1') {
             if ($kos->foto) {
                 Storage::disk('public')->delete($kos->foto); 
