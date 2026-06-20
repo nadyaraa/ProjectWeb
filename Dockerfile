@@ -25,6 +25,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 
 # 3. Aktifkan modul mod_rewrite Apache untuk rute Laravel
 RUN a2enmod rewrite
+RUN echo "upload_max_filesize = 5M" > /usr/local/etc/php/conf.d/uploads.ini \
+    && echo "post_max_size = 5M" >> /usr/local/etc/php/conf.d/uploads.ini
 
 # 4. Ubah Document Root Apache ke folder /public milik Laravel
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
